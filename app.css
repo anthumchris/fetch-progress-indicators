@@ -1,9 +1,30 @@
 html, body {
   margin: 0;
-  padding: 20px 0 0 0;
+  padding: 0;
   background: #191b21;
   text-align: center;
-  font-family: verdana, arial, sans-serif;
+  font-family:  sans-serif;
+  font-weight: 300;
+}
+
+a {
+  color: #666;
+  text-decoration: none;
+}
+a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+main {
+  margin-top: 2rem;
+}
+footer {
+  margin-top: 2rem;
+}
+footer a {
+  padding: 1em;
+  font-size: 14px;
+  display: inline-block;
 }
 
 .img {
