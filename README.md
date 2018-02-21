@@ -18,14 +18,16 @@ Prior to the recent addition of [fetch()](https://developer.mozilla.org/en-US/do
 
 ### Back-End Server
 
-A remote Nginx server running HTTP/2 is limiting download speeds to to 30kbps to ensure that progress bars always show when the remote images are fetched.  Both Baseline JPEG and Progressive JPEG files are available for testing, and you can find more test files below if needed:
+A remote Nginx server running HTTP/2 is limiting download speeds to to 30kbps to ensure that progress bars always show when the remote images are fetched.  Caching is disabled on all responses.  Both Baseline JPEG and Progressive JPEG files are available for testing, and you can find more test files below if needed:
 
 https://dev.anthum.com/retain/5kbps/sunrise-progressive.jpg<br>
 https://dev.anthum.com/retain/10kbps/sunrise-progressive.jpg<br>
 https://dev.anthum.com/retain/20kbps/sunrise-progressive.jpg<br>
-https://dev.anthum.com/retain/30kbps/sunrise-progressive.jpg
+https://dev.anthum.com/retain/30kbps/sunrise-progressive.jpg<br>
+https://dev.anthum.com/retain/nolimit/sunrise-progressive.jpg
 
 https://dev.anthum.com/retain/5kbps/sunrise-baseline.jpg<br>
 https://dev.anthum.com/retain/10kbps/sunrise-baseline.jpg<br>
 https://dev.anthum.com/retain/20kbps/sunrise-baseline.jpg<br>
-https://dev.anthum.com/retain/30kbps/sunrise-baseline.jpg
+https://dev.anthum.com/retain/30kbps/sunrise-baseline.jpg<br>
+https://dev.anthum.com/retain/nolimit/sunrise-baseline.jpg
