@@ -1,22 +1,19 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #191b21;
+  background: #2b334a;
   text-align: center;
   font-family:  sans-serif;
   font-weight: 300;
 }
 
 a {
-  color: #666;
+  color: #839adc;
   text-decoration: none;
 }
 a:hover {
   color: #fff;
   text-decoration: underline;
-}
-main {
-  margin-top: 2rem;
 }
 footer {
   margin-top: 2rem;
@@ -30,12 +27,20 @@ footer a {
 .img {
   margin: 0 auto;
   display: inline-block;
-  width: 600px;
-  height: 315px;
+  width: 100%;
+  max-width: 600px;
   background: #000;
   position: relative;
+  overflow: hidden;
 }
-
+.img:before {
+  display: block;
+  content: "";
+  width: 100%;
+}
+.img.x40-21:before {
+  padding-top: 52.5%; /* 40:21 aspect */
+}
 .img img {
   position: absolute;
   top: 0;
@@ -86,4 +91,10 @@ footer a {
   height: 100%;
   box-shadow: 0 0 4px 1px #627188;
   transition: width .2s ease-in;
+}
+
+@media (min-width: 700px) {
+  main {
+  margin-top: 3rem;
+  }
 }
