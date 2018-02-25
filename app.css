@@ -1,13 +1,20 @@
 html, body {
   margin: 0;
   padding: 0;
+}
+
+body {
   background: #2b334a;
   text-align: center;
   font-family:  sans-serif;
   font-weight: 300;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;  
 }
 
 a {
+  padding: .5em 1em;
   color: #839adc;
   text-decoration: none;
 }
@@ -16,16 +23,57 @@ a:hover {
   text-decoration: underline;
 }
 footer {
-  margin-top: 2rem;
+  padding: 1rem 0;
 }
 footer a {
-  padding: 1em;
   font-size: 14px;
   display: inline-block;
 }
 
-.img {
+p {
+  color: #9096a7;
+  padding: 0 1em;
+  text-align: left;
+  line-height: 1.5em;
+  max-width: 600px;
+  margin: 2em auto 0 auto;
+}
+
+.btn {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.btn a {
+  border-radius: 5px;
+  background: #54638e;
+  color: #dbe4ff;
+}
+.btn-restart {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity .5s .1s ease-in;
+}
+.btn-stop {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading .btn-restart {
+  opacity: 0;
+  pointer-events: none;
+  transition: none;
+}
+.loading .btn-stop {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity .5s .1s ease-in;
+}
+
+.image {
   margin: 0 auto;
+  margin-bottom: 3rem;
   display: inline-block;
   width: 100%;
   max-width: 600px;
@@ -33,15 +81,15 @@ footer a {
   position: relative;
   overflow: hidden;
 }
-.img:before {
+.image:before {
   display: block;
   content: "";
   width: 100%;
 }
-.img.x40-21:before {
+.image.x40-21:before {
   padding-top: 52.5%; /* 40:21 aspect */
 }
-.img img {
+.image img {
   position: absolute;
   top: 0;
   right: 0;
@@ -50,14 +98,14 @@ footer a {
   width: 100%;
   z-index: 20;
   opacity: 0;
-  transition: all .8s ease-in;
 }
 
-.img img.loaded {
+.loading-complete img {
+  transition: all .8s ease-in;
   opacity: 1;
 }
 
-.img .loading {
+.image .progress-bar {
   position: absolute;
   background: #444;
   color: #fff;
@@ -75,22 +123,43 @@ footer a {
 
   opacity: 0;
 }
-.img .loading.done {
-  transition: opacity 0s .2s ease-out;
+.loading .progress-bar {
+  opacity: 1;
+}
+.loading-complete .progress-bar {
+  transition: opacity .2s .2s ease-out;
   opacity: 0;
 }
 
-.img .progress {
+.progress-bar .progress {
   background: #1ac3c3;
-  /*background: #0b8aac;*/
-  /*background: #7493e6;*/
   display: inline-block;
-  max-width: 100%;
-  width: 0;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
   box-sizing: border-box;
   height: 100%;
   box-shadow: 0 0 4px 1px #627188;
-  transition: width .2s ease-in;
+}
+
+.loading .progress {
+  transition: transform 100ms linear;
+}
+
+.error {
+  margin-top: 3em;
+  color: #f00;
+  opacity: 0;
+}
+.error a {
+  padding: 0;
+  display: inline;
+  color: inherit;
+  text-decoration: underline;
+}
+.loading-error .error {
+  transition: opacity .5s ease-in;
+  opacity: 1;
 }
 
 @media (min-width: 700px) {
