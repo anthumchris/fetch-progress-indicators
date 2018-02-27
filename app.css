@@ -150,6 +150,7 @@ p {
   margin-top: 3em;
   color: #f00;
   opacity: 0;
+  height: 1em;
 }
 .error a {
   padding: 0;
