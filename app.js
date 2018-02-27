@@ -133,7 +133,7 @@ const imageLoader = (function() {
       }
 
       console.log('Starting download...');
-      progressFetcher.fetch('https://dev.anthum.com/retain/30kbps/sunrise-baseline.jpg')
+      progressFetcher.fetch('https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg')
       .then(response => response.blob())
       .then(blob => URL.createObjectURL(blob))
       .then(url => downloadDone(url))
