@@ -1,6 +1,4 @@
-## Deployment
-
-This repository's working `master` branch is available below:
+## Demo
 
 https://anthumchris.github.io/fetch-progress-indicators/
 
