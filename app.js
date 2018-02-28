@@ -37,7 +37,6 @@ class ProgressReportFetcher {
       const total = parseInt(contentLength,10);
       let loaded = 0;
 
-      // Set as read-only for stop() to access
       this._reader=response.body.getReader()
 
       const me = this;
