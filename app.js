@@ -68,6 +68,9 @@ class ProgressReportFetcher {
                 me.onProgress.call(me, {loaded, total});
                 controller.enqueue(value);
                 read();
+              }).catch(error => {
+                console.error(error);
+                controller.error(error)
               });
             }
           }
