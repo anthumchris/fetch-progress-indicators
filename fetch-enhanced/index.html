@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Enhanced Fetch() Progress Indicator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png" />
+    <link rel="stylesheet" type="text/css" href="app.css">
+  </head>
+  <body>
+    <main>
+      <div class="loader" id="loader">
+        <div id="image" class="image x40-21"><div class="progress-bar" id="progress-bar"><div class="progress" id="progress"></div></div><img id="img" src=""></div>
+        <div class="btn btn-restart"><a href="javascript:imageLoader.startDownload()">Restart</a></div>
+        <div class="btn btn-stop"><a href="javascript:imageLoader.stopDownload()">Stop</a></div>
+        <div class="error"></div>
+      </div>
+      <p>
+        This example shows a progress bar while a remote image is downloaded with a declarative <code>fetch()</code> request.
+        Users probably prefer seeing images load progressively with inline <code>&lt;img&gt;</code> tags, and
+        progress bars may be better suited for larger, non-image <code>fetch()</code> requests.
+      </p>
+      <p>
+        The future Service Worker example will show progress bars for inline images loading
+        naturally with <code>&lt;img&gt;</code> tags.
+      </p>
+    </main>
+    <footer>
+      <a href="/">Home</a>
+      <a href="https://github.com/AnthumChris/fetch-progress-indicators">View on GitHub</a>
+    </footer>
+
+      <script src="app.js"></script>
+  </body>
+</html>

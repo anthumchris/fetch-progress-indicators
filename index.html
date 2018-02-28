@@ -1,33 +1,85 @@
 <html>
   <head>
     <meta charset="utf8">
-    <title>fetch() progress indicator</title>
+    <title>Fetch API Progress Indicators</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.ico" type="image/png" />
-    <link rel="stylesheet" type="text/css" href="app.css">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #2b334a;
+        color: #bfc6da;
+      }
+      body {
+        padding: 0 1em;
+        text-align: left;
+        font-family:  sans-serif;
+        font-weight: 300;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;  
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: #91aeff;
+      }
+      a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      footer {
+        padding: 1rem 0;
+        text-align: center;
+      }
+      footer a {
+        text-decoration: none;
+        padding: .5em 1em;
+        font-size: 14px;
+        display: inline-block;
+      }
+      p {
+        text-align: left;
+        line-height: 1.5em;
+        margin: 0 auto 2em auto;
+      }
+
+      h1 {
+        margin-bottom: 3rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: .5em;
+      }
+    </style>
   </head>
   <body>
     <main>
-      <div class="loader" id="loader">
-        <div id="image" class="image x40-21"><div class="progress-bar" id="progress-bar"><div class="progress" id="progress"></div></div><img id="img" src=""></div>
-        <div class="btn btn-restart"><a href="javascript:imageLoader.startDownload()">Restart</a></div>
-        <div class="btn btn-stop"><a href="javascript:imageLoader.stopDownload()">Stop</a></div>
-        <div class="error"></div>
-      </div>
+      <h1>Fetch API Progress Indicator Examples</h1>
+
+      <h2><a href="fetch-basic/">Fetch - Basic</a></h2>
       <p>
-        This example shows a progress bar while a remote image is downloaded with a declarative <code>fetch()</code> request.
-        Users probably prefer seeing images load progressively with inline <code>&lt;img&gt;</code> tags, and
-        progress bars may be better suited for larger, non-image <code>fetch()</code> requests.
+        Shows progress for a remote image downloaded with <code>fetch()</code>. Minimal code is used to exemplify the basic JavaScript requirements.
       </p>
+
+      <h2><a href="fetch-enhanced/">Fetch - Enhanced</a></h2>
       <p>
-        The future Service Worker example will show progress bars for inline images loading
-        naturally with <code>&lt;img&gt;</code> tags.
+        Similar to above with robust code to handle real-world UI and application requirements.  Downloads can be cancelled/restarted, multiple downloads are prevented, race conditions don't exist, errors edge cases are handled.
       </p>
+
+      <!--
+      <h2>Service Worker - Basic</h2>
+      <p>[not yet finalized]</p>
+      
+      <h2>Service Worker - Enhanced UI</h2>
+      <p>[not yet finalized]</p>
+      -->
+
     </main>
     <footer>
       <a href="https://github.com/AnthumChris/fetch-progress-indicators">View on GitHub</a>
     </footer>
-
-      <script src="app.js"></script>
   </body>
 </html>
