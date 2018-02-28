@@ -31,7 +31,7 @@ class ProgressReportFetcher {
 
       if (contentLength === null) {
         // don't evaluate download progress if we can't compare against a total size
-        throw Error('Content-Length header response header missing.  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers">More Info</a>')
+        throw Error('Content-Length server response header missing.  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers">More Info</a>')
       }
 
       const total = parseInt(contentLength,10);
