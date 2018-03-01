@@ -1,0 +1,76 @@
+<!-- This page loads Service Worker and won't be shown again after it refreshes for SW interception. -->
+
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Basic Service Worker Progress Indicator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../favicon.ico" type="image/png" />
+    <style>
+      html, body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        text-align: center;
+        font-size: 16px;
+        padding: 5em 1em 1em;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between; 
+      }
+      footer a {
+        padding: 1em;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="status">Installing Service Worker...</div>
+    </main>
+    <footer>
+      <a href="../">Home</a>
+      <a href="https://github.com/AnthumChris/fetch-progress-indicators">View on GitHub</a>
+    </footer>
+
+    <script>
+      var elStatus = document.getElementById('status');
+
+      // Ensure unsupported browsers don't load invalid JS (e.g. ES6, Promises), compile successfully, and show errors
+      if (!(navigator.serviceWorker && window.fetch && window.ReadableStream)) {
+        status('Service Worker, Fetch, or ReadableStream API is not supported in this browser.<p>This demo cannot function without them.');
+      } else {
+        navigator.serviceWorker.register('sw-simple.js')
+        .then(reg => {
+          if (reg.installing) {
+            const sw = reg.installing || reg.waiting;
+            sw.onstatechange = function() {
+              if (sw.state === 'installed') {
+                onward();
+              }
+            };
+          } else if (reg.active) {
+            // something's not right or SW is bypassed.  previously-installed SW should have redirected this request to different page
+            status('<p>Service Worker is installed and not functioning as intended.<p>Please contact developer.')
+          }
+        })
+        .catch(error => status(error))
+      }
+
+      function status(text) {
+        elStatus.innerHTML = text;
+      }
+
+      // SW installed.  Refresh page so SW can respond with SW-enabled page.
+      function onward() {
+        setTimeout(function() {
+          window.location.reload();
+        },1000);
+      }
+    </script>
+  </body>
+</html>

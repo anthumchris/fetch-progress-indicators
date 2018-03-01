@@ -1,0 +1,141 @@
+<!-- This page should not be accessed directly and should be served by Service Worker.  -->
+
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Basic Service Worker Progress Indicator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../favicon.ico" type="image/png" />
+    <style>
+      html, body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        text-align: center;
+        font-size: 16px;
+        padding: 0 0 1rem 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between; 
+      }
+
+      .image {
+        margin: 0 auto 1.5rem auto;
+        display: inline-block;
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 10px 0 #ccc;
+      }
+      .image:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: 52.5%; /* 40:21 aspect ratio */
+      }
+      .image img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .notice {
+        display: none;
+        color: #f00;
+        margin-bottom: 1em;
+      }
+
+      p {
+        color: #333;
+        padding: 0 1em;
+        text-align: left;
+        line-height: 1.5em;
+        max-width: 600px;
+        margin: 0 auto 2em auto;
+      }
+
+      button {
+        display: block;
+        margin: 0 auto 2rem auto;
+      }
+
+      footer {
+        margin-top: 1em;
+      }
+      footer a {
+        padding: 1em;
+        display: inline-block;
+      }
+
+      @media (min-width: 700px) {
+        main {
+        margin-top: 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="image"><img id="img" onerror="status('Error loading image.  See console for details.')" onload="status('Done')" /></div>
+      <div id="status">&nbsp;</div>
+      <h1 id="progress">&nbsp;</h1>
+      <div class="notice" id="new-service-worker-installed">Service Worker updated. Please reload.</div>
+      <button onclick="window.location.reload()">Reload</button>
+      <p>
+        This example uses a Service Worker and <code>ReadableStream</code> to simulataneously show download progress of an <code>&lt;img&gt;</code> tag.
+        Unlike the <code>fetch()</code> examples, the image renders progressively with the browser's native loading behavior.
+      </p>
+    </main>
+    <footer>
+      <a href="../">Home</a>
+      <a href="https://github.com/AnthumChris/fetch-progress-indicators">View on GitHub</a>
+    </footer>
+
+    <script>
+      const elStatus = document.getElementById('status');
+      const elProgress = document.getElementById('progress');
+      const elImg = document.getElementById('img');
+
+      navigator.serviceWorker.addEventListener('message', event => progress(event.data));
+      loadImage();
+
+      navigator.serviceWorker.getRegistrations()
+      .then(arr => {
+        for (reg of arr) {
+          // notify new user if an updated SW was installed.
+          reg.onupdatefound = function() {
+            const newSw = reg.installing;
+            reg.installing.onstatechange = function() {
+              if (newSw.state === 'installed') {
+                document.getElementById('new-service-worker-installed').style.display='block';
+              }
+            };
+          };
+        }
+      })
+
+      function loadImage() {
+        status('loading inline <code>&lt;img&gt;</code>');
+        // elImg.src = 'http://localhost/300kbps/images/sunrise-baseline.jpg#requestId=1';
+        // elImg.src = 'http://localhost/30kbps/images/sunrise-baseline.jpg#requestId=1';
+        elImg.src = 'https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg#requestId=1';
+      }
+
+      function progress({loaded, total}) {
+        elProgress.innerHTML = Math.round(loaded/total*100)+'%';
+      }
+
+      function status(text) {
+        elStatus.innerHTML = text;
+      }
+    </script>
+  </body>
+</html>
