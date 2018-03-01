@@ -8,6 +8,7 @@
       body {
         text-align: center;
         font-size: 16px;
+        font-family: sans-serif;
         padding: 1rem 0;
         display: flex;
         flex-flow: column nowrap;
@@ -44,7 +45,7 @@
       const elStatus = document.getElementById('status');
       const elProgress = document.getElementById('progress');
 
-      status('downloading...');
+      status('downloading with fetch()...');
       fetch('https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg')
       .then(response => {
         if (!response.ok) {
