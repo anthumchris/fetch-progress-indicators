@@ -1,29 +1,51 @@
-## Demo
+This repository provides working examples for implementing progress bars and progress indicators with the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), and [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
-https://anthumchris.github.io/fetch-progress-indicators/
+### Examples
+* [Fetch](https://fetch-progress.anthum.com/fetch-basic/): A ReadableStream is used to show download progress during a `fetch()` download.
+* [Fetch - Enhanced](https://fetch-progress.anthum.com/fetch-enhanced/): Same as above with robust code for preventing multiple downloads and handling other real-world UI interactions and edge cases.
+* [Service Worker](https://fetch-progress.anthum.com/sw-basic/): A ReadableStream is used in a Service Worker to simulatenously show download progress for the `FetchEvent` of an inline `<img>` tag.  
+
+### Browser Support
+The aforementioned APIs are new/expermiental and do not currently work on all browsers. Testing was done with the browsers below:
+
+| Browser | Test Results |
+| :--- | :--- |
+| Mac Chrome 64 | Full support |
+| Mac Firefox 58  | Full support (requires [activation of experimental flags](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams#Browser_support))  |
+| Mac Safari 11 | Fetch support only. Service Workers unsupported |
+| iOS Mobile Safari 8 | Unsupported |
+| IE/Edge | Not tested (no device available) |
+
+# Background
+
+Prior to the recent addition of [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), the [XMLHttpRequest.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onprogress) callback handler was traditionally used to show progress bars and progress indicators.  The Fetch API is great and we should use it, but "onprogress" handlers are not currently implemented with Fetch.  These examples allow us to leverage Fetch while providing users with immediate feedback during certain "loading" states.  Progress indicators could be especially useful to users on slow networks.
+
+# Lessons & Conclusions
+
+This repository began as a proof of concept for showing progress indicators from Service Workers.  Everything seemed to work out and a few important lessons and caveats were discovered:
+1. Firefox successfully stops network reading and cancels downloads on fetch events that implement custom `ReadableStream` readers when the user signals the cancelation/abort of a page load (e.g. pressing ESC, clicking stop button, invoking `window.stop()`)
+1. Chrome and Safari don't stop network reading and files continue to download when a page load cancel/abort occurs.
+1. The `abort` event does not seem to be firing on Chrome, Firefox, or Safari as defined in the HTML spec [7.8.12 Aborting a document load](https://html.spec.whatwg.org/multipage/browsing-the-web.html#abort-a-document).
+   1. `<img onabort>` callbacks are not called.
+   1. `window.onabort` callbacks are not called.
+   2. see [Abort Event Detection Test](https://fetch-progress.anthum.com/test/abort-event.html)
+1. Ideally, Service Workers should have access to the `abort` event and take appropriate action when needed.
 
 
-# Fetch() Progress Indicators
+### Back-End Image Server
 
-This repository attempts to provide working JavaScript examples of displaying progress indicators to users when the [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is used to retrieve or download large files or average files over slow connections.  The big goal is to provide users with immediate feedback during certain "loading" states while allowing developers to leverage the huge gains of the new Fetch API.  
+To properly exemplify progress indicators for slow downloads or large files, a small (100kb) JPEG is being served from a remote HTTP/2 Nginx server that limits download speeds.  The buffer/packet size is also reduced to show smoother, or more frequent progress updates (more iterations of `ReadableStreamDefaultReader.read()`).  Otherwise, `read()` would send fewer progress updates that result in choppy progress indicators. Caching is disabled to force network requests for repeated tests.
 
-Prior to the recent addition of [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), the [XMLHttpRequest.onprogress](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onprogress) callback handler was used.  All examples currently leverage [`response.body.getReader()`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream), which is not currently implemented in all browsers.  
-
-## Examples
-1. The first completed example shows a progress indicator when `fetch()` is used to load a remote image.  `fetch()` is called, the response is parsed with `response.blob()`, and the `<img>` element's `src` attribute value is set to a blob URL.
-
-2. The next (not yet started) example will attempt to use a [ServiceWorker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) to show a progress indicator while the browser natively loads an image using the standard `<img>.src` value with the remote HTTPS image URL.  This native browser loading allows the image to be progressively shown as it's loaded.  We'll try to keep this native functionality and use `ServiceWorker` to show progress bar concurrently without interrupting the natural flow of things.
-
-### Back-End Server
-
-A remote Nginx server running HTTP/2 is limiting download speeds to force progress bar displays when the remote images are fetched.  Caching is disabled on all responses.  Both Baseline JPEG and Progressive JPEG files are available for testing, and you can find more test files below if needed.
+Both Baseline and Progressive JPEG files are available for testing with other speeds:
 
 https://fetch-progress.anthum.com/10kbps/images/sunrise-baseline.jpg<br>
 https://fetch-progress.anthum.com/20kbps/images/sunrise-baseline.jpg<br>
 https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg<br>
-https://fetch-progress.anthum.com/60kbps/images/sunrise-baseline.jpg
+https://fetch-progress.anthum.com/60kbps/images/sunrise-baseline.jpg<br>
+https://fetch-progress.anthum.com/120kbps/images/sunrise-baseline.jpg
 
 https://fetch-progress.anthum.com/10kbps/images/sunrise-progressive.jpg<br>
 https://fetch-progress.anthum.com/20kbps/images/sunrise-progressive.jpg<br>
 https://fetch-progress.anthum.com/30kbps/images/sunrise-progressive.jpg<br>
-https://fetch-progress.anthum.com/60kbps/images/sunrise-progressive.jpg
+https://fetch-progress.anthum.com/60kbps/images/sunrise-progressive.jpg<br>
+https://fetch-progress.anthum.com/120kbps/images/sunrise-progressive.jpg
