@@ -1,0 +1,172 @@
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Abort Event Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../favicon.ico" type="image/png" />
+    <style>
+      body {
+        font-size: 16px;
+        font-family: sans-serif;
+        padding: 2em;
+      }
+      img {
+        max-width: 100%;
+        margin-top: 1em;
+      }
+      #konsole {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        padding: 8px;
+        background: rgba(0,0,0,.8);
+        color: lime;
+        font-size: 12px;
+      }
+      #konsole > div {
+        padding: 2px 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <p>
+      This page attempts to detect the <code>abort</code> event.  Type ESC or press browser's stop button before image download completes
+    </p>
+
+    <img id="img" src="https://fetch-progress.anthum.com/10kbps/images/sunrise-baseline.jpg" />
+
+    <div id="konsole"></div>
+
+    <script>
+      var img = document.getElementById('img');
+      var konsole = document.getElementById('konsole');
+
+      function bindEvents(object, events) {
+        for (var i=0; i<events.length; i++) {
+          var eventName = events[i];
+          object.addEventListener(eventName, function(event) {
+            var objString = object.toString().replace(/object /, '');
+            console.log(event.type, objString)
+            var msg = document.createElement('div');
+            msg.innerHTML = event.type+' - '+objString;
+            konsole.appendChild(msg);
+          });
+        }
+      }
+
+      var events = [
+        'abort',
+        'afterprint',
+        'beforeprint',
+        'beforeunload',
+        'blur',
+        'cancel',
+        'canplay',
+        'canplaythrough',
+        'change',
+        'click',
+        'close',
+        'connect',
+        'contextmenu',
+        'copy',
+        'ctextmenu',
+        'cuechange',
+        'cut',
+        'DOMContentLoaded',
+        'duratichange',
+        'emptied',
+        'ended',
+        'error',
+        'focus',
+        'gotpointercapture',
+        'input',
+        'invalid',
+        'load',
+        'loadeddata',
+        'loadedmetadata',
+        'loadend',
+        'loadstart',
+        'lostpointercapture',
+        'message',
+        'messageerror',
+        'offline',
+        'online',
+        'open',
+        'pagehide',
+        'pageshow',
+        'paste',
+        'popstate',
+        'progress',
+        'ratechange',
+        'readystatechange',
+        'rejectionhandled',
+        'reset',
+        'resize',
+        'search',
+        'securitypolicyviolation',
+        'seeked',
+        'seeking',
+        'select',
+        'selectstart',
+        'stalled',
+        'storage',
+        'submit',
+        'suspend',
+        'toggle',
+        'unhandledrejection',
+        'unload',
+        'waiting',
+        // 'auxclick',
+        // 'beforecopy',
+        // 'beforecut',
+        // 'beforepaste',
+        // 'copy',
+        // 'cut',
+        // 'dblclick',
+        // 'drag',
+        // 'dragend',
+        // 'dragenter',
+        // 'dragleave',
+        // 'dragover',
+        // 'dragstart',
+        // 'drop',
+        // 'hashchange',
+        // 'keydown',
+        // 'keypress',
+        // 'keyup',
+        // 'languagechange',
+        // 'mousedown',
+        // 'mouseenter',
+        // 'mouseleave',
+        // 'mousemove',
+        // 'mouseout',
+        // 'mouseover',
+        // 'mouseup',
+        // 'mousewheel',
+        // 'paste',
+        // 'pause',
+        // 'play',
+        // 'playing',
+        // 'pointercancel',
+        // 'pointerdown',
+        // 'pointerenter',
+        // 'pointerleave',
+        // 'pointermove',
+        // 'pointerout',
+        // 'pointerover',
+        // 'pointerup',
+        // 'scroll',
+        // 'timeupdate',
+        // 'volumechange',
+        // 'webkitfullscreenchange',
+        // 'webkitfullscreenerror',
+        // 'wheel',
+      ];
+
+      bindEvents(window, events);
+      bindEvents(document, events);
+      bindEvents(img, events);
+    </script>
+  </body>
+</html>
