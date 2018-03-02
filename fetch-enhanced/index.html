@@ -12,7 +12,7 @@
         <div id="image" class="image x40-21"><div class="progress-bar" id="progress-bar"><div class="progress" id="progress"></div></div><img id="img" src=""></div>
         <div class="btn btn-restart"><a href="javascript:imageLoader.startDownload()">Restart</a></div>
         <div class="btn btn-stop"><a href="javascript:imageLoader.stopDownload()">Stop</a></div>
-        <div class="error"></div>
+        <div id="error" class="error"></div>
       </div>
       <p>
         This example shows a progress bar while a remote image is downloaded with a declarative <code>fetch()</code> request.
@@ -29,6 +29,15 @@
       <a href="https://github.com/AnthumChris/fetch-progress-indicators">View on GitHub</a>
     </footer>
 
-      <script src="app.js"></script>
+    <script>
+      // Ensure unsupported browsers don't load invalid JS (e.g. ES6, Promises), compile successfully, and show errors
+      if (!(window.fetch && window.ReadableStream)) {
+        document.getElementsByTagName('main')[0].innerHTML = '<div style="margin-top: 2rem; color: #fff;">Fetch or ReadableStream API is not supported in this browser.<br><br>This demo cannot function without them.</div>'
+      } else {
+        var script = document.createElement('script');
+        script.src = 'supported-browser.js';
+        document.body.append(script);
+      }
+    </script>
   </body>
 </html>
