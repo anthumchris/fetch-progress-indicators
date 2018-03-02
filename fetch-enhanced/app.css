@@ -16,7 +16,6 @@ body {
 }
 
 a {
-  padding: .5em 1em;
   color: #839adc;
   text-decoration: none;
 }
@@ -28,7 +27,7 @@ footer {
   padding: 1rem 0;
 }
 footer a {
-  font-size: 14px;
+  padding: .5em 1em;
   display: inline-block;
 }
 
@@ -40,6 +39,10 @@ p {
   max-width: 600px;
   margin: 2em auto 0 auto;
 }
+p a {
+  color: #dbe4ff;
+  text-decoration: underline;
+}
 
 .btn {
   position: absolute;
@@ -48,6 +51,7 @@ p {
   pointer-events: none;
 }
 .btn a {
+  padding: .5em 1em;
   border-radius: 5px;
   background: #54638e;
   color: #dbe4ff;
