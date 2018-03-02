@@ -1,21 +1,19 @@
 <html>
   <head>
     <meta charset="utf8">
-    <title>Fetch API Progress Indicators</title>
+    <title>Fetch &amp; Streams API Progress Indicator Examples</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.ico" type="image/png" />
     <style>
       html, body {
         margin: 0;
         padding: 0;
-        background: #2b334a;
-        color: #bfc6da;
+        color: #333;
       }
       body {
         padding: 0 1em;
         text-align: left;
         font-family:  sans-serif;
-        font-weight: 300;
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;  
@@ -24,10 +22,6 @@
       }
 
       a {
-        color: #91aeff;
-      }
-      a:hover {
-        color: #fff;
         text-decoration: underline;
       }
       footer {
@@ -35,47 +29,49 @@
         text-align: center;
       }
       footer a {
-        text-decoration: none;
         padding: .5em 1em;
-        font-size: 14px;
         display: inline-block;
       }
       p {
         text-align: left;
         line-height: 1.5em;
-        margin: 0 auto 2em auto;
+        margin: 0 auto 1.5em auto;
       }
 
+      code {
+        line-height: 1em;
+      }
       h1 {
         margin-bottom: 3rem;
+        font-size: 130%
       }
       h2 {
-        font-size: 1.25rem;
-        margin-bottom: .5em;
+        font-size: 110%;
+        margin-bottom: .25em;
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>Fetch API Progress Indicator Examples</h1>
+      <h1>Fetch &amp; Streams API Progress Indicator Examples</h1>
 
+      <h2><a href="sw-basic/">Service Worker - Basic</a></h2>
+      <p>
+        An inline <code>&lt;img&gt;</code> tag renders on the page while a Service Worker and <code>ReadableStream</code> simultaneously provide download progress. Minimal code is used to exemplify the basic JavaScript requirements.
+      </p>
+      
       <h2><a href="fetch-basic/">Fetch - Basic</a></h2>
       <p>
-        A remote image is downloaded with <code>fetch()</code>. Minimal code is used to exemplify the basic JavaScript requirements.
+        A <code>ReadableStream</code> shows progress while a remote image is downloaded with <code>fetch()</code>. Minimal code is used to exemplify the basic JavaScript requirements.
       </p>
 
       <h2><a href="fetch-enhanced/">Fetch - Enhanced</a></h2>
       <p>
-        Similar to above with robust code to handle real-world UI and application requirements.  Downloads can be cancelled/restarted, multiple downloads are prevented, race conditions don't exist, errors edge cases are handled.
+        Similar to above with progress bars and robust code to handle real-world UI interactions.  Downloads can be cancelled/restarted, multiple downloads are prevented, race conditions don't exist, errors edge cases are handled.
       </p>
 
-      <h2><a href="sw-basic/">Service Worker - Basic</a></h2>
-      <p>
-        An inline <code>&lt;img&gt;</code> tag renders on the page while a Service Worker simultaneously provides download progress. Minimal code is used to exemplify the basic JavaScript requirements.
-      </p>
-      
       <h2>Service Worker - Enhanced UI</h2>
-      <p>[not yet completed].  This will exemplify progress for multiple <code>&lt;img&gt;</code> tags, download cancellations, and other real-world UI requirements.</p>
+      <p>[not yet started].  This will exemplify progress for multiple <code>&lt;img&gt;</code> tags, download cancellations, and other real-world UI interactions.</p>
 
     </main>
     <footer>
