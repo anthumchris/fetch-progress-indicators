@@ -19,5 +19,5 @@ navigator.serviceWorker.register('sw-simple.js')
 function onward() {
   setTimeout(function() {
     window.location.reload();
-  },3000);
+  },2000);
 }
