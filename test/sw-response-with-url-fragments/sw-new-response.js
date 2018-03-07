@@ -31,33 +31,19 @@ self.addEventListener('fetch', event => {
     else if (/\?stream-response/.test(url)) {
       console.log('stream-response', url);
       event.respondWith(
-        fetch(imgUrl)
-        .then(response => {
-          const reader = response.body.getReader();
-          return new Response(
-            new ReadableStream({
-              start(controller) {
-                read();
-                function read() {
-                  reader.read().then(({done, value}) => {
-                    if (done) {
-                      controller.close();
-                      return;
-                    }
-
-                    controller.enqueue(value);
-                    read();
-                  })
-                }
-              }
-            }),
-            {
-              headers: {
-                'content-type': 'image/svg+xml'
-              }
+        new Response(
+          new ReadableStream({
+            start(controller) {
+              controller.enqueue(imgByteArray);
+              controller.close();
             }
-          )
-        })
+          }),
+          {
+            headers: {
+              'content-type': 'image/svg+xml'
+            }
+          }
+        )
       )
     }
 
