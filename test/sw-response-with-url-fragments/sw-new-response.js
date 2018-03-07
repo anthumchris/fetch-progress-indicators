@@ -25,11 +25,7 @@ self.addEventListener('fetch', event => {
 
     else if (/\?blob-response/.test(url)) {
       console.log('blob-response', url);
-      event.respondWith(
-        fetch(imgUrl)
-        .then(response => response.blob())
-        .then(body => new Response(body))
-      )
+      event.respondWith(new Response(blob))
     }
 
     else if (/\?stream-response/.test(url)) {
