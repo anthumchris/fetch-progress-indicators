@@ -12,6 +12,7 @@ The aforementioned APIs are new/expermiental and do not currently work on all br
 | :--- | :--- |
 | Chrome 64 | Full support |
 | Firefox 58  | Full support (requires [activation of experimental flags](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams#Browser_support))  |
+| Firefox 59  | Fetch Support Only (requires [activation of experimental flags](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams#Browser_support))<br>Service Worker Bug ([issue #9](https://github.com/AnthumChris/fetch-progress-indicators/issues/9)) |
 | iOS Safari 8 | Unsupported |
 | iOs Safari 11 | Fetch support only. Service Workers unsupported |
 | Mac Safari 11 | Fetch support only. Service Workers unsupported |
