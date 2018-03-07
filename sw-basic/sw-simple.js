@@ -1,5 +1,5 @@
-// evaluate progress on *#requestId=* URLs only
-const progressIndicatorUrls = /#requestId=/i;
+// evaluate progress on *?requestId=* URLs only
+const progressIndicatorUrls = /\?requestId=/i;
 
 // always install updated SW immediately
 self.addEventListener('install', event => {
