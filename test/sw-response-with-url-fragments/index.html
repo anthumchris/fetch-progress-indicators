@@ -83,7 +83,9 @@
           newSw.onstatechange = function() {
             if (newSw.state === 'installed') {
               console.log('SW installed/updated')
-              window.location.reload();
+              setTimeout(function() {
+                window.location.reload();
+              }, 0);
             }
           };
         };
