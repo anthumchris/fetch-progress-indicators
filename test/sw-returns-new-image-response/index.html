@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Service Worker Response Debugger</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../favicon.ico" type="image/png" />
+    <style>
+      body {
+        font-size: 16px;
+        font-family: sans-serif;
+        padding: 2em;
+        margin: 0 auto;
+        max-width: 650px;
+        font-weight: 300;
+      }
+      h4 {
+        margin: 2em 0 .5em 0;
+      }
+      .image {
+        display: inline-block;
+        width: 100%;
+        max-width: 36px;
+        position: relative;
+        overflow: hidden;
+        margin-right: .5em;
+        vertical-align: middle;
+      }
+      .image:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: 100%; /* 1:1; aspect ratio */
+      }
+      .image img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      .test {
+        margin-top: .5em;
+      }
+      label {
+        font-family: monospace;
+        font-size: 12px;
+      }
+      label:before {
+        content: 'URI: ';
+        color: #999;
+      }
+      p {
+        line-height: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <p>A Service Worker installs/updates and refreshes the page.  It then intercepts "sw-image.svg" <code>img</code> URLs and dynamicaly responds with a static base64 image using the methods below.  A bug occurs when URLs contain a fragment value and SW responds with new Response() constructor</p>
+
+    <h4>respondWith() fetch()</h4>
+    <div class="test"><div class="image"><img src="sw-image.svg?fetch1" /></div><label>sw-image.svg?fetch1</label></div>
+    <div class="test"><div class="image"><img src="sw-image.svg?fetch2#" /></div><label>sw-image.svg?fetch2#</label></div>
+    <div class="test"><div class="image"><img src="sw-image.svg?fetch3#value" /></div><label>sw-image.svg?fetch3#value</label></div>
+
+    <h4>respondWith() new Response(blob)</code></h4>
+    <div class="test"><div class="image"><img src="sw-image.svg?blob-response1" /></div><label>sw-image.svg?blob-response1</label></div>
+    <div class="test"><div class="image"><img src="sw-image.svg?blob-response2#" /></div><label>sw-image.svg?blob-response2#</label></div>
+    <div class="test"><div class="image"><img src="sw-image.svg?blob-response3#value" /></div><label>sw-image.svg?blob-response3#value</label></div>
+
+    <h4>respondWith() new Response(new ReadableStream())</code></h4>
+    <div class="test"><div class="image"><img src="sw-image.svg?stream-response1" /></div><label>sw-image.svg?stream-response1</label></div>
+    <div class="test"><div class="image"><img src="sw-image.svg?stream-response2#" /></div><label>sw-image.svg?stream-response2#</label></div>
+    <div class="test"><div class="image"><img src="sw-image.svg?stream-response3#value" /></div><label>sw-image.svg?stream-response3#value</label></div>
+
+    <script>
+      // Install SW and refresh page if needed
+      navigator.serviceWorker.register('sw-new-response.js')
+      .then(reg => {
+        console.log('SW registered')
+        reg.onupdatefound = function() {
+          const newSw = reg.installing;
+          newSw.onstatechange = function() {
+            if (newSw.state === 'installed') {
+              console.log('SW installed/updated')
+            }
+          };
+        };
+      })
+    </script>
+  </body>
+</html>
