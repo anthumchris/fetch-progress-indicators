@@ -14,7 +14,8 @@ The aforementioned APIs are new/expermiental and do not currently work on all br
 | Firefox 58/59  | Full support (requires [activation of experimental flags](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams#Browser_support))  |
 | iOS Safari 8 | Unsupported |
 | iOs Safari 11 | Fetch support only. Service Workers unsupported |
-| Mac Safari 11 | Fetch support only. Service Workers unsupported |
+| Mac Safari 11.0 | Fetch support only. Service Workers unsupported |
+| Mac Safari 11.1 | Full Support |
 | IE/Edge | Not tested (no device available) |
 
 # Background
