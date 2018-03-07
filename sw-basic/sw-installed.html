@@ -126,19 +126,17 @@
       navigator.serviceWorker.addEventListener('message', event => progress(event.data));
       loadImage();
 
-      navigator.serviceWorker.getRegistrations()
-      .then(arr => {
-        for (reg of arr) {
-          // notify new user if an updated SW was installed.
-          reg.onupdatefound = function() {
-            const newSw = reg.installing;
-            reg.installing.onstatechange = function() {
-              if (newSw.state === 'installed') {
-                document.getElementById('new-service-worker-installed').style.display='block';
-              }
-            };
+      navigator.serviceWorker.register('sw-simple.js')
+      .then(reg => {
+        // notify new user if an updated SW was installed.
+        reg.onupdatefound = function() {
+          const newSw = reg.installing;
+          newSw.onstatechange = function() {
+            if (newSw.state === 'installed') {
+              document.getElementById('new-service-worker-installed').style.display='block';
+            }
           };
-        }
+        };
       })
 
       function loadImage() {
