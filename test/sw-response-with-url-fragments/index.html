@@ -56,7 +56,7 @@
     </style>
   </head>
   <body>
-    <p>A Service Worker installs/updates and refreshes the page.  It then intercepts "sw-image.svg" <code>img</code> URLs and dynamicaly responds with a static base64 image using the methods below.  A bug occurs when URLs contain a fragment value and SW responds with new Response() constructor</p>
+    <p>A Service Worker installs/updates and refreshes the page.  It then intercepts "sw-image.svg" <code>img</code> URLs and dynamicaly responds with a static base64 image using the methods below.  A bug occurs when in Firefox 59 when URLs contain a fragment value and SW responds with new Response() constructor</p>
 
     <h4>respondWith() fetch()</h4>
     <div class="test"><div class="image"><img src="sw-image.svg?fetch1" /></div><label>sw-image.svg?fetch1</label></div>
