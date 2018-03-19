@@ -31,7 +31,7 @@ This repository began as a proof of concept for showing progress indicators from
    1. `<img onabort>` callbacks are not called.
    1. `window.onabort` callbacks are not called.
    2. see [Abort Event Detection Test](https://fetch-progress.anthum.com/test/abort-event.html)
-1. Ideally, Service Workers should have access to the `abort` event and take appropriate action when needed.
+1. A Firefox bug was discovered when using hash fragments in URLs: https://bugzilla.mozilla.org/show_bug.cgi?id=1443850
 
 
 ### Back-End Image Server
