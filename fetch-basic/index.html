@@ -29,7 +29,7 @@
         font-family: sans-serif;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: space-between; 
+        justify-content: space-between;
       }
       #img {
         width: 600px;
@@ -70,12 +70,6 @@
     <script>
       'use strict'
 
-      var elStatus = document.getElementById('status');
-
-      function status(text) {
-        elStatus.innerHTML = text;
-      }
-
       // Ensure unsupported browsers don't load invalid JS (e.g. ES6, Promises), compile successfully, and show errors
       if (!(window.fetch && window.ReadableStream)) {
         status('Fetch or ReadableStream API is not supported in this browser.<p>This demo cannot function without them.');
@@ -85,5 +79,6 @@
         document.body.append(script);
       }
     </script>
+    <script src='response-progress.js'></script>
   </body>
 </html>
