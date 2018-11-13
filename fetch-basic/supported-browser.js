@@ -6,16 +6,16 @@ status('downloading with fetch()...');
 fetch('https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg')
 .then(response => {
   if (!response.ok) {
-    throw Error(response.status+' '+response.statusText)
+    throw new Error(response.status + ' ' + response.statusText)
   }
 
   if (!response.body) {
-    throw Error('ReadableStream not yet supported in this browser.')
+    throw new Error('ReadableStream not yet supported in this browser.')
   }
 
   const contentLength = response.headers.get('content-length');
   if (!contentLength) {
-    throw Error('Content-Length response header unavailable');
+    throw new Error('Content-Length response header unavailable');
   }
 
   const total = parseInt(contentLength, 10);
@@ -31,7 +31,7 @@ fetch('https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg')
           reader.read().then(({done, value}) => {
             if (done) {
               controller.close();
-              return; 
+              return;
             }
             loaded += value.byteLength;
             progress({loaded, total})
@@ -39,7 +39,7 @@ fetch('https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg')
             read();
           }).catch(error => {
             console.error(error);
-            controller.error(error)                  
+            controller.error(error)
           })
         }
       }
