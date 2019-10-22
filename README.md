@@ -1,6 +1,6 @@
 Examples for showing progress bars and progress indicators for `fetch()`.  Uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), and [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
-### Demo
+# Demo
 
 https://fetch-progress.anthum.com/
 
