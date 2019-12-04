@@ -1,8 +1,13 @@
 Examples for showing progress bars and progress indicators for `fetch()`.  Uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), and [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
+<img clear="both" align="left" width="200px" src="https://raw.githubusercontent.com/AnthumChris/fetch-progress-indicators/master/images/logo-streams-300.png" /><br>
+
+
 # Demo
 
 https://fetch-progress.anthum.com/
+
+<br><br>
 
 ### Examples
 * [Fetch](https://fetch-progress.anthum.com/fetch-basic/): A ReadableStream is used to show download progress during a `fetch()` download.
