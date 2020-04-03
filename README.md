@@ -14,6 +14,10 @@ https://fetch-progress.anthum.com/
 * [Fetch - Enhanced](https://fetch-progress.anthum.com/fetch-enhanced/): Same as above with robust code for preventing multiple downloads and handling other real-world UI interactions and edge cases.
 * [Service Worker](https://fetch-progress.anthum.com/sw-basic/): A ReadableStream is used in a Service Worker to simulatenously show download progress for the `FetchEvent` of an inline `<img>` tag.  
 
+### Potential Pitfalls
+
+- https://github.com/AnthumChris/fetch-progress-indicators/issues/13
+
 ### Browser Support
 The aforementioned APIs are new/expermiental and do not currently work on all browsers. Testing was done with the browsers below:
 
