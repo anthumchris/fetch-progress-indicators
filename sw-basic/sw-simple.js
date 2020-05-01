@@ -48,11 +48,12 @@ function respondWithProgressMonitor(clientId, response) {
     return response;
   }
 
-  const contentLength = response.headers.get('content-length');
-
-  if (contentLength == null) {
+  // server must send custom x-file-size header if gzip or other content-encoding is used
+  const contentEncoding = response.headers.get('content-encoding');
+  const contentLength = response.headers.get(contentEncoding ? 'x-file-size' : 'content-length');
+  if (contentLength === null) {
     // don't track download progress if we can't compare against a total size
-    console.warn('No Content-Length no header in response.  See https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers');
+    console.warn('Response size header unavailable. Cannot measure progress');
     return response;
   }
 
