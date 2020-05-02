@@ -30,7 +30,7 @@ class ProgressReportFetcher {
       // to access headers, server must send CORS header "Access-Control-Expose-Headers: content-encoding, content-length x-file-size"
       // server must send custom x-file-size header if gzip or other content-encoding is used
       const contentEncoding = response.headers.get('content-encoding');
-      const contentLength = response.headers.get(contentEncoding ? 'x-file-size' : 'content-lengths');
+      const contentLength = response.headers.get(contentEncoding ? 'x-file-size' : 'content-length');
       if (contentLength === null) {
         // don't evaluate download progress if we can't compare against a total size
         throw Error('Response size header unavailable');
